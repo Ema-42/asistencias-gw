@@ -8,6 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   app.enableVersioning();
+  app.enableCors();
   const configService = app.get(ConfigService);
   //swagger doc
   const config = new DocumentBuilder()
