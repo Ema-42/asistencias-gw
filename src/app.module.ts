@@ -9,6 +9,8 @@ import { TipoTurnosModule } from './modules/catalogos/tipo-turnos/tipo-turnos.mo
 import { TipoSolicitudesModule } from './modules/catalogos/tipo-solicitudes/tipo-solicitudes.module';
 import { CatalogosModule } from './modules/catalogos/catalogos.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { DepartamentosModule } from './modules/ubicaciones/departamentos/departamentos.module';
+import { UbicacionesModule } from './modules/ubicaciones/ubicaciones.module';
 
 @Module({
   imports: [
@@ -29,6 +31,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     TipoTurnosModule,
     TipoSolicitudesModule,
     CatalogosModule,
+    UbicacionesModule,
+    DepartamentosModule,
   ],
   controllers: [AppController],
   providers: [AppService],

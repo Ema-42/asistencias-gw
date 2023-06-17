@@ -1,23 +1,29 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
-  IsMongoId,
   IsNotEmpty,
+  IsString,
   IsNumber,
   IsOptional,
-  IsString,
+  IsMongoId,
 } from 'class-validator';
 import { Types } from 'mongoose';
 
-export class CreateAptitudeDto {
+export class CreateMunicipioDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
   nombre: string;
 
   @ApiProperty()
+  @IsOptional()
   @IsString()
+  @IsMongoId()
+  departamentoId: Types.ObjectId;
+
+  @ApiProperty()
   @IsNotEmpty()
-  descripcion: string;
+  @IsString()
+  identificador: string;
 
   @IsNumber()
   @IsOptional()
@@ -26,10 +32,4 @@ export class CreateAptitudeDto {
   @IsNumber()
   @IsOptional()
   esEliminado: number;
-
-  @ApiProperty()
-  @IsOptional()
-  @IsString()
-  @IsMongoId()
-  aptitud_principal?: Types.ObjectId;
 }

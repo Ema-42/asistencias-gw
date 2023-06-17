@@ -37,9 +37,6 @@ export class AptitudesController {
     return this.aptitudesService.findAll();
   }
 
-  @ApiParam({
-    name: 'id',
-  })
   @Get(':id')
   @VersionDescription('1', 'servicio GET para obtener un registro de aptitud')
   findOne(@Param('id') id: string) {

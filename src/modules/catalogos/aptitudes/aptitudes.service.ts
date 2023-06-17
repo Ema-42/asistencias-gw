@@ -66,17 +66,17 @@ export class AptitudesService {
   }
 
   async eliminacionLogica(id: string): Promise<Aptitud> {
-    const tipoTurnoEliminarL = await this.aptitudModel.findById(id).exec();
-    if (!tipoTurnoEliminarL) {
+    const aptitudEliminarL = await this.aptitudModel.findById(id).exec();
+    if (!aptitudEliminarL) {
       throw new NotFoundException('El id no existe');
     }
-    tipoTurnoEliminarL.esEliminado = 1;
-    return tipoTurnoEliminarL.save();
+    aptitudEliminarL.esEliminado = 1;
+    return aptitudEliminarL.save();
   }
 
   async eliminacionFisica(id: string): Promise<void> {
-    const tipoTurnoEliminarF = await this.aptitudModel.findByIdAndDelete(id);
-    if (!tipoTurnoEliminarF) {
+    const aptitudEliminarF = await this.aptitudModel.findByIdAndDelete(id);
+    if (!aptitudEliminarF) {
       throw new NotFoundException('El id no existe');
     }
   }
