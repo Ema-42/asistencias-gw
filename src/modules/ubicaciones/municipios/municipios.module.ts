@@ -3,6 +3,10 @@ import { MunicipiosService } from './municipios.service';
 import { MunicipiosController } from './municipios.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Municipio, MunicipioSchema } from './schema/municipios.schema';
+import {
+  Departamento,
+  DepartamentoSchema,
+} from '../departamentos/schema/departamentos.schema';
 
 @Module({
   imports: [
@@ -10,6 +14,10 @@ import { Municipio, MunicipioSchema } from './schema/municipios.schema';
       {
         name: Municipio.name,
         schema: MunicipioSchema,
+      },
+      {
+        name: Departamento.name,
+        schema: DepartamentoSchema,
       },
     ]),
   ],

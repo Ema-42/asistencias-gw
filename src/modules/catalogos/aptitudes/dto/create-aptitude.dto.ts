@@ -1,11 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsMongoId,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsArray, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { Types } from 'mongoose';
 
 export class CreateAptitudeDto {
@@ -16,20 +10,11 @@ export class CreateAptitudeDto {
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   descripcion: string;
 
-  @IsNumber()
-  @IsOptional()
-  estado: number;
-
-  @IsNumber()
-  @IsOptional()
-  esEliminado: number;
-
   @ApiProperty()
-  @IsOptional()
-  @IsString()
-  @IsMongoId()
-  aptitud_principal?: Types.ObjectId;
+  @IsNotEmpty()
+  @IsArray()
+  aptitudes: [Types.ObjectId];
 }

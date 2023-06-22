@@ -5,12 +5,15 @@ import { CambiarEstadoDto } from './dto/cambiar-estado.dto';
 import { Municipio } from './schema/municipios.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { Departamento } from '../departamentos/schema/departamentos.schema';
 
 @Injectable()
 export class MunicipiosService {
   constructor(
     @InjectModel(Municipio.name)
     private municipioModel: Model<Municipio>,
+    @InjectModel(Departamento.name)
+    private departamentoModel: Model<Departamento>,
   ) {}
   async create(createMunicipioDto: CreateMunicipioDto): Promise<Municipio> {
     const crearMunicipio = await this.municipioModel.create(createMunicipioDto);
@@ -38,16 +41,22 @@ export class MunicipiosService {
     if (!municipioActualizar) {
       throw new NotFoundException('El id no existe');
     }
-    municipioActualizar.nombre = municipioActualizarDto.nombre
-      ? municipioActualizarDto.nombre
-      : municipioActualizar.nombre;
-    municipioActualizar.identificador = municipioActualizarDto.identificador
-      ? municipioActualizarDto.identificador
-      : municipioActualizar.identificador;
-    municipioActualizar.departamentoId = municipioActualizarDto.departamentoId
-      ? municipioActualizarDto.departamentoId
-      : municipioActualizar.departamentoId;
+    Object.keys(municipioActualizarDto).forEach((propiedad) => {
+      if (propiedad in municipioActualizar) {
+        municipioActualizar[propiedad] = municipioActualizarDto[propiedad];
+      }
+    });
     await municipioActualizar.save();
+    // Actualizar el registro del departamento
+    await this.departamentoModel.findOneAndUpdate(
+      { municipios: { $elemMatch: { _id: id } } },
+      {
+        $set: {
+          'municipios.$.nombre': municipioActualizar.nombre,
+          'municipios.$.identificador': municipioActualizar.identificador,
+        },
+      },
+    );
     return municipioActualizar;
   }
 

@@ -12,6 +12,7 @@ export class TipoSolicitudesService {
     @InjectModel(TipoSolicitud.name)
     private tipoSolicitudModel: Model<TipoSolicitud>,
   ) {}
+
   async create(
     createTipoSolicitudDto: CreateTipoSolicitudeDto,
   ): Promise<TipoSolicitud> {

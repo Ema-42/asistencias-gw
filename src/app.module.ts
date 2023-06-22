@@ -11,6 +11,8 @@ import { CatalogosModule } from './modules/catalogos/catalogos.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DepartamentosModule } from './modules/ubicaciones/departamentos/departamentos.module';
 import { UbicacionesModule } from './modules/ubicaciones/ubicaciones.module';
+import { TurnosModule } from './modules/turnos/turnos.module';
+import { SolicitudesModule } from './modules/solicitudes/solicitudes.module';
 
 @Module({
   imports: [
@@ -33,6 +35,8 @@ import { UbicacionesModule } from './modules/ubicaciones/ubicaciones.module';
     CatalogosModule,
     UbicacionesModule,
     DepartamentosModule,
+    TurnosModule,
+    SolicitudesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

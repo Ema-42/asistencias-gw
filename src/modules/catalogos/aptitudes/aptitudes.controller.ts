@@ -11,7 +11,7 @@ import { AptitudesService } from './aptitudes.service';
 import { CreateAptitudeDto } from './dto/create-aptitude.dto';
 import { UpdateAptitudeDto } from './dto/update-aptitude.dto';
 import { CambiarEstadoDto } from './dto/cambiar-estado.dto';
-import { ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { VersionDescription } from 'src/decorators/controller.decorator';
 
 @ApiTags('APTITUDES')

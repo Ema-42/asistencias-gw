@@ -42,13 +42,12 @@ export class DepartamentosService {
     if (!departamentoActualizar) {
       throw new NotFoundException('El id no existe');
     }
-    departamentoActualizar.nombre = departamentoActualizarDto.nombre
-      ? departamentoActualizarDto.nombre
-      : departamentoActualizar.nombre;
-    departamentoActualizar.identificador =
-      departamentoActualizarDto.identificador
-        ? departamentoActualizarDto.identificador
-        : departamentoActualizar.identificador;
+    Object.keys(departamentoActualizarDto).forEach((propiedad) => {
+      if (propiedad in departamentoActualizar) {
+        departamentoActualizar[propiedad] =
+          departamentoActualizarDto[propiedad];
+      }
+    });
     await departamentoActualizar.save();
     return departamentoActualizar;
   }

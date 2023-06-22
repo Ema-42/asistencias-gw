@@ -18,4 +18,4 @@ export class Departamento {
   esEliminado: number;
 }
 
-export const DepartamentosSchema = SchemaFactory.createForClass(Departamento);
+export const DepartamentoSchema = SchemaFactory.createForClass(Departamento);

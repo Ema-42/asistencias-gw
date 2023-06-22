@@ -12,9 +12,7 @@ export class AptitudesService {
     @InjectModel(Aptitud.name) private aptitudModel: Model<Aptitud>,
   ) {}
   async create(createAptitudeDto: CreateAptitudeDto): Promise<Aptitud> {
-    // const createdCat = new this.catModel(createCatDto);
     const createAptitud = await this.aptitudModel.create(createAptitudeDto);
-    // return createdCat.save();
     return createAptitud;
   }
 
@@ -39,15 +37,11 @@ export class AptitudesService {
     if (!aptitudActualizar) {
       throw new NotFoundException('El id no existe');
     }
-    aptitudActualizar.nombre = aptitudActualizarDto.nombre
-      ? aptitudActualizarDto.nombre
-      : aptitudActualizar.nombre;
-    aptitudActualizar.descripcion = aptitudActualizarDto.descripcion
-      ? aptitudActualizarDto.descripcion
-      : aptitudActualizar.descripcion;
-    aptitudActualizar.aptitud_principal = aptitudActualizarDto.aptitud_principal
-      ? aptitudActualizarDto.aptitud_principal
-      : aptitudActualizar.aptitud_principal;
+    Object.keys(aptitudActualizarDto).forEach((propiedad) => {
+      if (propiedad in aptitudActualizar) {
+        aptitudActualizar[propiedad] = aptitudActualizarDto[propiedad];
+      }
+    });
     await aptitudActualizar.save();
     return aptitudActualizar;
   }
