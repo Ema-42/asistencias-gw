@@ -5,19 +5,19 @@ export type AptitudesDocument = HydratedDocument<Aptitud>;
 
 @Schema({ timestamps: true, collection: 'aptitudes' })
 export class Aptitud {
-  @Prop()
+  @Prop({ type: String, required: true })
   nombre: string;
 
-  @Prop()
+  @Prop({ type: String })
   descripcion: string;
 
   @Prop({ type: [Types.ObjectId], ref: 'tipo-aptitudes', required: true })
   aptitudes: [Types.ObjectId];
 
-  @Prop({ default: 1 })
+  @Prop({ type: Number, default: 1 })
   estado: number;
 
-  @Prop({ default: 0 })
+  @Prop({ type: Number, default: 0 })
   esEliminado: number;
 }
 

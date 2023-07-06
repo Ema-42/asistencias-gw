@@ -5,16 +5,16 @@ export type TipoSolicitudDocument = HydratedDocument<TipoSolicitud>;
 
 @Schema({ timestamps: true, collection: 'tipo_solicitudes' })
 export class TipoSolicitud {
-  @Prop()
+  @Prop({ type: String, required: true })
   nombre: string;
 
-  @Prop()
+  @Prop({ type: String, required: true })
   descripcion: string;
 
-  @Prop({ default: 1 })
+  @Prop({ type: Number, default: 1 })
   estado: number;
 
-  @Prop({ default: 0 })
+  @Prop({ type: Number, default: 0 })
   esEliminado: number;
 }
 

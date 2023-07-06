@@ -6,6 +6,8 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { Aptitudes } from 'src/modules/interfaces/aptitudes.interface';
+import { Oficinas } from 'src/modules/interfaces/oficinas.interfaces';
 
 export class CreateTurnoDto {
   @ApiProperty()
@@ -26,12 +28,12 @@ export class CreateTurnoDto {
   @ApiProperty()
   @IsArray()
   @IsOptional()
-  oficinas: [];
+  oficinas: Oficinas[];
 
   @ApiProperty()
   @IsArray()
   @IsOptional()
-  aptitudes: [];
+  aptitudes: Aptitudes[];
 
   @ApiProperty()
   @IsNotEmpty()

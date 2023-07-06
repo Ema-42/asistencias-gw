@@ -1,41 +1,45 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
+import { HydratedDocument, ObjectId, Types } from 'mongoose';
+import { Aptitudes } from 'src/modules/interfaces/aptitudes.interface';
+import { Oficinas } from 'src/modules/interfaces/oficinas.interfaces';
 
 export type TurnosDocument = HydratedDocument<Turno>;
 
 @Schema({ timestamps: true, collection: 'turnos' })
 export class Turno {
-  @Prop()
+  @Prop({ type: String, required: true })
   nombre: string;
 
-  @Prop()
+  @Prop({ type: String })
   descripcion: string;
 
-  @Prop()
+  @Prop({ type: Number })
   fueraHorario: number;
 
-  @Prop({ type: [Types.ObjectId], ref: 'oficinas' })
-  oficinas: [];
+  // @Prop({ type: Array, ref: 'eo_oficinas', default: [] })
+  // oficinas: Oficinas[];
+  @Prop({ type: [Types.ObjectId], ref: 'Oficina', default: [] })
+  oficinas: ObjectId[];
 
-  @Prop({ type: [Types.ObjectId], ref: 'aptitudes' })
-  aptitudes: [];
+  @Prop({ type: [Types.ObjectId], ref: 'Aptitud', default: [] })
+  aptitudes: ObjectId[];
 
-  @Prop()
+  @Prop({ type: Number })
   externo: number;
 
-  @Prop()
+  @Prop({ type: Number })
   presencial: number;
 
-  @Prop()
+  @Prop({ type: String })
   horaInicio: string;
 
-  @Prop()
+  @Prop({ type: String })
   horaFin: string;
 
-  @Prop({ default: 1 })
+  @Prop({ type: Number, default: 1 })
   estado: number;
 
-  @Prop({ default: 0 })
+  @Prop({ type: Number, default: 0 })
   esEliminado: number;
 }
 

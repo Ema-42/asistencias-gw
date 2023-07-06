@@ -47,16 +47,6 @@ export class MunicipiosService {
       }
     });
     await municipioActualizar.save();
-    // Actualizar el registro del departamento
-    await this.departamentoModel.findOneAndUpdate(
-      { municipios: { $elemMatch: { _id: id } } },
-      {
-        $set: {
-          'municipios.$.nombre': municipioActualizar.nombre,
-          'municipios.$.identificador': municipioActualizar.identificador,
-        },
-      },
-    );
     return municipioActualizar;
   }
 

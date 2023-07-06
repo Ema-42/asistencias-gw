@@ -5,19 +5,19 @@ export type SolicitudEstadosDocument = HydratedDocument<SolicitudEstado>;
 
 @Schema({ timestamps: true, collection: 'solicitudes_estados' })
 export class SolicitudEstado {
-  @Prop()
+  @Prop({ type: String, required: true })
   nombre: string;
 
-  @Prop()
+  @Prop({ type: Number })
   orden: number;
 
-  @Prop()
+  @Prop({ type: String })
   color: string;
 
-  @Prop({ default: 1 })
+  @Prop({ type: Number, default: 1 })
   estado: number;
 
-  @Prop({ default: 0 })
+  @Prop({ type: Number, default: 0 })
   esEliminado: number;
 }
 

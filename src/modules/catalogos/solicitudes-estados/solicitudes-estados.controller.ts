@@ -14,7 +14,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { VersionDescription } from 'src/decorators/controller.decorator';
 import { CambiarEstadoDto } from './dto/cambiar-estado.dto';
 
-@ApiTags('SOLICITUDES_ESTADOS')
+@ApiTags('SOLICITUDES ESTADOS')
 @Controller('solicitudes-estados')
 export class SolicitudesEstadosController {
   constructor(

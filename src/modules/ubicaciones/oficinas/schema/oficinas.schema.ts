@@ -5,13 +5,13 @@ export type OficinasDocument = HydratedDocument<Oficina>;
 
 @Schema({ timestamps: true, collection: 'eo_oficinas' })
 export class Oficina {
-  @Prop()
+  @Prop({ type: String, required: true })
   nombre: string;
 
-  @Prop()
+  @Prop({ type: String })
   identificador: string;
 
-  @Prop()
+  @Prop({ type: String })
   direccion: string;
 
   @Prop({ type: Types.ObjectId, ref: 'eo_municipios' })
@@ -20,13 +20,13 @@ export class Oficina {
   @Prop({ type: Types.ObjectId, ref: 'eo_departamentos' })
   departamentoId: Types.ObjectId;
 
-  @Prop()
+  @Prop({ type: String })
   telefono: string;
 
-  @Prop({ default: 1 })
+  @Prop({ type: Number, default: 1 })
   estado: number;
 
-  @Prop({ default: 0 })
+  @Prop({ type: Number, default: 0 })
   esEliminado: number;
 }
 

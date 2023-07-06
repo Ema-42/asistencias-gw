@@ -1,27 +1,35 @@
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { Turno } from './schema/turnos.schema';
+import { CambiarEstadoDto } from './dto/cambiar-estado.dto';
 import { CreateTurnoDto } from './dto/create-turno.dto';
 import { UpdateTurnoDto } from './dto/update-turno.dto';
-import { InjectModel } from '@nestjs/mongoose';
-import { Turno } from './schema/turnos.schema';
-import { Model } from 'mongoose';
-import { CambiarEstadoDto } from './dto/cambiar-estado.dto';
 
 @Injectable()
 export class TurnosService {
   constructor(@InjectModel(Turno.name) private turnoModel: Model<Turno>) {}
 
   async create(createTurnoDto: CreateTurnoDto): Promise<Turno> {
-    const createdTurno = await this.turnoModel.create(createTurnoDto);
-    return createdTurno;
+    const crearTurno = await this.turnoModel.create(createTurnoDto);
+    return crearTurno;
   }
 
   async findAll(): Promise<Turno[]> {
-    const listado = await this.turnoModel.find().exec();
+    const listado = await this.turnoModel
+      .find()
+      .populate('aptitudes', 'nombre estado esEliminado')
+      .populate('oficinas', 'nombre estado esEliminado')
+      .exec();
     return listado;
   }
 
   async findOne(id: string): Promise<Turno> {
-    const turnoBuscar = await this.turnoModel.findById(id).exec();
+    const turnoBuscar = await this.turnoModel
+      .findById(id)
+      .populate('aptitudes', 'nombre estado esEliminado')
+      .populate('oficinas', 'nombre estado esEliminado')
+      .exec();
     if (!turnoBuscar) {
       throw new NotFoundException('El id no existe');
     }
@@ -29,17 +37,12 @@ export class TurnosService {
   }
 
   async update(id: string, turnoActualizarDto: UpdateTurnoDto): Promise<Turno> {
-    const turnoActualizar = await this.turnoModel.findById(id);
+    const turnoActualizar = await this.turnoModel
+      .findOneAndUpdate({ _id: id }, turnoActualizarDto, { new: true })
+      .exec();
     if (!turnoActualizar) {
-      throw new NotFoundException('El id no existe');
+      throw new NotFoundException('El turno no existe');
     }
-    Object.keys(turnoActualizarDto).forEach((propiedad) => {
-      propiedad in turnoActualizar
-        ? (turnoActualizar[propiedad] = turnoActualizarDto[propiedad])
-        : console.log(`${propiedad} no existe`);
-    });
-
-    await turnoActualizar.save();
     return turnoActualizar;
   }
 

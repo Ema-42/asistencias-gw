@@ -5,11 +5,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Aptitud } from './schema/aptitudes.schema';
 import { Model } from 'mongoose';
 import { CambiarEstadoDto } from './dto/cambiar-estado.dto';
+import { Turno } from 'src/modules/turnos/schema/turnos.schema';
 
 @Injectable()
 export class AptitudesService {
   constructor(
     @InjectModel(Aptitud.name) private aptitudModel: Model<Aptitud>,
+    @InjectModel(Turno.name) private turnoModel: Model<Turno>,
   ) {}
   async create(createAptitudeDto: CreateAptitudeDto): Promise<Aptitud> {
     const createAptitud = await this.aptitudModel.create(createAptitudeDto);

@@ -5,25 +5,25 @@ export type TipoTurnosDocument = HydratedDocument<TipoTurno>;
 
 @Schema({ timestamps: true, collection: 'tipo_turnos' })
 export class TipoTurno {
-  @Prop()
+  @Prop({ type: String, required: true })
   nombre: string;
 
-  @Prop()
+  @Prop({ type: String })
   identificador: string;
 
-  @Prop()
+  @Prop({ type: String })
   descripcion: string;
 
-  @Prop()
+  @Prop({ type: Boolean })
   externo: boolean;
 
-  @Prop()
+  @Prop({ type: Boolean })
   presencial: boolean;
 
-  @Prop({ default: 1 })
+  @Prop({ type: Number, default: 1 })
   estado: number;
 
-  @Prop({ default: 0 })
+  @Prop({ type: Number, default: 0 })
   esEliminado: number;
 }
 

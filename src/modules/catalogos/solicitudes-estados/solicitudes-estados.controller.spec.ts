@@ -11,7 +11,9 @@ describe('SolicitudesEstadosController', () => {
       providers: [SolicitudesEstadosService],
     }).compile();
 
-    controller = module.get<SolicitudesEstadosController>(SolicitudesEstadosController);
+    controller = module.get<SolicitudesEstadosController>(
+      SolicitudesEstadosController,
+    );
   });
 
   it('should be defined', () => {
