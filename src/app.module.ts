@@ -13,6 +13,7 @@ import { DepartamentosModule } from './modules/ubicaciones/departamentos/departa
 import { UbicacionesModule } from './modules/ubicaciones/ubicaciones.module';
 import { TurnosModule } from './modules/turnos/turnos.module';
 import { SolicitudesModule } from './modules/solicitudes/solicitudes.module';
+import { FuncionariosModule } from './modules/funcionarios/funcionarios.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { SolicitudesModule } from './modules/solicitudes/solicitudes.module';
     DepartamentosModule,
     TurnosModule,
     SolicitudesModule,
+    FuncionariosModule,
   ],
   controllers: [AppController],
   providers: [AppService],

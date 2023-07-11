@@ -41,17 +41,12 @@ export class TipoSolicitudesService {
     id: string,
     tipoSolicitudActualizarDto: UpdateTipoSolicitudeDto,
   ): Promise<TipoSolicitud> {
-    const tipoSolicitudActualizar = await this.tipoSolicitudModel.findById(id);
+    const tipoSolicitudActualizar = await this.tipoSolicitudModel
+      .findOneAndUpdate({ _id: id }, tipoSolicitudActualizarDto, { new: true })
+      .exec();
     if (!tipoSolicitudActualizar) {
-      throw new NotFoundException('El id no existe');
+      throw new NotFoundException('El tipo de solicitud no existe');
     }
-    tipoSolicitudActualizar.nombre = tipoSolicitudActualizarDto.nombre
-      ? tipoSolicitudActualizarDto.nombre
-      : tipoSolicitudActualizar.nombre;
-    tipoSolicitudActualizar.descripcion = tipoSolicitudActualizarDto.descripcion
-      ? tipoSolicitudActualizarDto.descripcion
-      : tipoSolicitudActualizar.descripcion;
-    await tipoSolicitudActualizar.save();
     return tipoSolicitudActualizar;
   }
 

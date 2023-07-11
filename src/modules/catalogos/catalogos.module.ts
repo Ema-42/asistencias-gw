@@ -6,6 +6,7 @@ import { TipoSolicitudesModule } from './tipo-solicitudes/tipo-solicitudes.modul
 import { TipoTurnosModule } from './tipo-turnos/tipo-turnos.module';
 import { TipoAptitudesModule } from './tipo-aptitudes/tipo-aptitudes.module';
 import { SolicitudesEstadosModule } from './solicitudes-estados/solicitudes-estados.module';
+import { PersonasModule } from './personas/personas.module';
 
 const modules = [
   AptitudesModule,
@@ -13,6 +14,7 @@ const modules = [
   TipoTurnosModule,
   TipoAptitudesModule,
   SolicitudesEstadosModule,
+  PersonasModule,
 ];
 
 @Module({
@@ -24,6 +26,7 @@ const modules = [
         module,
       })),
     ),
+    PersonasModule,
   ],
 })
 export class CatalogosModule {}

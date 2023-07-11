@@ -11,7 +11,7 @@ export class Aptitud {
   @Prop({ type: String })
   descripcion: string;
 
-  @Prop({ type: [Types.ObjectId], ref: 'tipo-aptitudes', required: true })
+  @Prop({ type: [Types.ObjectId], ref: 'TipoAptitud', required: true })
   aptitudes: [Types.ObjectId];
 
   @Prop({ type: Number, default: 1 })

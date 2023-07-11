@@ -37,16 +37,12 @@ export class MunicipiosService {
     id: string,
     municipioActualizarDto: UpdateMunicipioDto,
   ): Promise<Municipio> {
-    const municipioActualizar = await this.municipioModel.findById(id);
+    const municipioActualizar = await this.municipioModel
+      .findOneAndUpdate({ _id: id }, municipioActualizarDto, { new: true })
+      .exec();
     if (!municipioActualizar) {
-      throw new NotFoundException('El id no existe');
+      throw new NotFoundException('El turno no existe');
     }
-    Object.keys(municipioActualizarDto).forEach((propiedad) => {
-      if (propiedad in municipioActualizar) {
-        municipioActualizar[propiedad] = municipioActualizarDto[propiedad];
-      }
-    });
-    await municipioActualizar.save();
     return municipioActualizar;
   }
 

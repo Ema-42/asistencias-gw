@@ -41,20 +41,15 @@ export class SolicitudesEstadosService {
     id: string,
     solicitudEstadoActualizarDto: UpdateSolicitudesEstadoDto,
   ): Promise<SolicitudEstado> {
-    const solicitudEstadoActualizar = await this.solicitudEstadoModel.findById(
-      id,
-    );
-    if (!solicitudEstadoActualizar) {
-      throw new NotFoundException('El id no existe');
+    const solicitudEstadosActualizar = await this.solicitudEstadoModel
+      .findOneAndUpdate({ _id: id }, solicitudEstadoActualizarDto, {
+        new: true,
+      })
+      .exec();
+    if (!solicitudEstadosActualizar) {
+      throw new NotFoundException('El turno no existe');
     }
-    Object.keys(solicitudEstadoActualizarDto).forEach((propiedad) => {
-      if (propiedad in solicitudEstadoActualizar) {
-        solicitudEstadoActualizar[propiedad] =
-          solicitudEstadoActualizarDto[propiedad];
-      }
-    });
-    await solicitudEstadoActualizar.save();
-    return solicitudEstadoActualizar;
+    return solicitudEstadosActualizar;
   }
 
   async cambiarEstado(

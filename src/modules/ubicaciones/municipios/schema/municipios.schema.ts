@@ -8,7 +8,7 @@ export class Municipio {
   @Prop()
   nombre: string;
 
-  @Prop({ type: Types.ObjectId, ref: 'eo_departamentos' })
+  @Prop({ type: Types.ObjectId, ref: 'Departamento' })
   departamentoId: Types.ObjectId;
 
   @Prop()

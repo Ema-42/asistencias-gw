@@ -1,4 +1,3 @@
-
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
@@ -12,7 +11,7 @@ async function bootstrap() {
   app.enableVersioning();
   app.enableCors();
   const configService = app.get(ConfigService);
-  //swagger doc
+
   const config = new DocumentBuilder()
     .setTitle('ASISTENCIAS API')
     .setContact(

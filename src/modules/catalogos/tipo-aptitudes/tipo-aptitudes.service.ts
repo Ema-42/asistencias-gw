@@ -32,18 +32,14 @@ export class TipoAptitudesService {
 
   async update(
     id: string,
-    oficinaActualizarDto: UpdateTipoAptitudeDto,
+    tipoAptitudActualizarDto: UpdateTipoAptitudeDto,
   ): Promise<TipoAptitud> {
-    const tipoAptitudActualizar = await this.tipoAptitudModel.findById(id);
+    const tipoAptitudActualizar = await this.tipoAptitudModel
+      .findOneAndUpdate({ _id: id }, tipoAptitudActualizarDto, { new: true })
+      .exec();
     if (!tipoAptitudActualizar) {
-      throw new NotFoundException('El id no existe');
+      throw new NotFoundException('El tipo de aptitud no existe');
     }
-    Object.keys(oficinaActualizarDto).forEach((propiedad) => {
-      if (propiedad in tipoAptitudActualizar) {
-        tipoAptitudActualizar[propiedad] = oficinaActualizarDto[propiedad];
-      }
-    });
-    await tipoAptitudActualizar.save();
     return tipoAptitudActualizar;
   }
 

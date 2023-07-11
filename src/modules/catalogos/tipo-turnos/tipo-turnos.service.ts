@@ -38,26 +38,12 @@ export class TipoTurnoService {
     id: string,
     tipoTurnoActualizarDto: UpdateTipoTurnoDto,
   ): Promise<TipoTurno> {
-    const tipoTurnoActualizar = await this.tipoTurnoModel.findById(id);
+    const tipoTurnoActualizar = await this.tipoTurnoModel
+      .findOneAndUpdate({ _id: id }, tipoTurnoActualizarDto, { new: true })
+      .exec();
     if (!tipoTurnoActualizar) {
-      throw new NotFoundException('El id no existe');
+      throw new NotFoundException('El tipo de turno no existe');
     }
-    tipoTurnoActualizar.nombre = tipoTurnoActualizarDto.nombre
-      ? tipoTurnoActualizarDto.nombre
-      : tipoTurnoActualizar.nombre;
-    tipoTurnoActualizar.identificador = tipoTurnoActualizarDto.identificador
-      ? tipoTurnoActualizarDto.identificador
-      : tipoTurnoActualizar.identificador;
-    tipoTurnoActualizar.descripcion = tipoTurnoActualizarDto.descripcion
-      ? tipoTurnoActualizarDto.descripcion
-      : tipoTurnoActualizar.descripcion;
-    tipoTurnoActualizar.externo = tipoTurnoActualizarDto.externo
-      ? tipoTurnoActualizarDto.externo
-      : tipoTurnoActualizar.externo;
-    tipoTurnoActualizar.presencial = tipoTurnoActualizarDto.presencial
-      ? tipoTurnoActualizarDto.presencial
-      : tipoTurnoActualizar.presencial;
-    await tipoTurnoActualizar.save();
     return tipoTurnoActualizar;
   }
 

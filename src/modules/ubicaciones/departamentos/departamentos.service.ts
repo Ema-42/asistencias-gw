@@ -38,17 +38,12 @@ export class DepartamentosService {
     id: string,
     departamentoActualizarDto: UpdateDepartamentoDto,
   ): Promise<Departamento> {
-    const departamentoActualizar = await this.departamentoModel.findById(id);
+    const departamentoActualizar = await this.departamentoModel
+      .findOneAndUpdate({ _id: id }, departamentoActualizarDto, { new: true })
+      .exec();
     if (!departamentoActualizar) {
-      throw new NotFoundException('El id no existe');
+      throw new NotFoundException('El departamento no existe');
     }
-    Object.keys(departamentoActualizarDto).forEach((propiedad) => {
-      if (propiedad in departamentoActualizar) {
-        departamentoActualizar[propiedad] =
-          departamentoActualizarDto[propiedad];
-      }
-    });
-    await departamentoActualizar.save();
     return departamentoActualizar;
   }
 

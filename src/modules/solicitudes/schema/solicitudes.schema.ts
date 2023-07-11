@@ -17,19 +17,19 @@ export class Solicitud {
   @Prop({ type: String })
   plazo: string;
 
-  @Prop({ type: Types.ObjectId, ref: 'solicitudes-estados' })
+  @Prop({ type: Types.ObjectId, ref: 'SolicitudEstado' })
   solicitudEstado: Types.ObjectId;
 
-  @Prop({ type: Types.ObjectId, ref: 'personas' })
+  @Prop({ type: Types.ObjectId, ref: 'Persona' })
   solicitante: Types.ObjectId;
 
-  @Prop({ type: Array, ref: 'funcionarios', default: [] })
+  @Prop({ type: Array, ref: 'Funcionario', default: [] })
   encargados: Encargados[];
 
-  @Prop({ type: Array, ref: 'solicitudes-estado', default: [] })
+  @Prop({ type: Array, ref: 'SolicitudEstado', default: [] })
   estados: Estados[];
 
-  @Prop({ type: Array, ref: 'aptitudes', default: [] })
+  @Prop({ type: Array, ref: 'Aptitud', default: [] })
   aptitudes: Aptitudes[];
 
   @Prop({ type: Number, default: 0 })

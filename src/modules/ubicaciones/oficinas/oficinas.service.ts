@@ -35,16 +35,12 @@ export class OficinasService {
     id: string,
     oficinaActualizarDto: UpdateOficinaDto,
   ): Promise<Oficina> {
-    const oficinaActualizar = await this.oficinaModel.findById(id);
+    const oficinaActualizar = await this.oficinaModel
+      .findOneAndUpdate({ _id: id }, oficinaActualizarDto, { new: true })
+      .exec();
     if (!oficinaActualizar) {
-      throw new NotFoundException('El id no existe');
+      throw new NotFoundException('La oficina no existe');
     }
-    Object.keys(oficinaActualizarDto).forEach((propiedad) => {
-      if (propiedad in oficinaActualizar) {
-        oficinaActualizar[propiedad] = oficinaActualizarDto[propiedad];
-      }
-    });
-    await oficinaActualizar.save();
     return oficinaActualizar;
   }
 

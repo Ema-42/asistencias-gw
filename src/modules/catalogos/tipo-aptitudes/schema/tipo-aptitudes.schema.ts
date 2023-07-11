@@ -8,7 +8,7 @@ export class TipoAptitud {
   @Prop({ type: String, required: true })
   nombre: string;
 
-  @Prop({ type: Types.ObjectId, ref: 'aptitudes', default: null })
+  @Prop({ type: Types.ObjectId, ref: 'Aptitud', default: null })
   aptitudId: Types.ObjectId;
 
   @Prop({ type: Number, default: 1 })

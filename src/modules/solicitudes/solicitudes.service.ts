@@ -29,8 +29,14 @@ export class SolicitudesService {
     return solicitudBuscar;
   }
 
-  update(id: string, updateSolicitudeDto: UpdateSolicitudeDto) {
-    return `This action updates a #${id} solicitude`;
+  async update(id: string, updateSolicitudeDto: UpdateSolicitudeDto) {
+    const solicitudActualizar = await this.solicitudModel
+      .findOneAndUpdate({ _id: id }, updateSolicitudeDto, { new: true })
+      .exec();
+    if (!solicitudActualizar) {
+      throw new NotFoundException('La solicitud no existe');
+    }
+    return solicitudActualizar;
   }
 
   remove(id: string) {

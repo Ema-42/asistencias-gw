@@ -14,10 +14,10 @@ export class Oficina {
   @Prop({ type: String })
   direccion: string;
 
-  @Prop({ type: Types.ObjectId, ref: 'eo_municipios' })
+  @Prop({ type: Types.ObjectId, ref: 'Municipio' })
   municipioId: Types.ObjectId;
 
-  @Prop({ type: Types.ObjectId, ref: 'eo_departamentos' })
+  @Prop({ type: Types.ObjectId, ref: 'Departamento' })
   departamentoId: Types.ObjectId;
 
   @Prop({ type: String })

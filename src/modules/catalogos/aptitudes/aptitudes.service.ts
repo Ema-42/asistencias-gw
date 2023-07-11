@@ -35,16 +35,12 @@ export class AptitudesService {
     id: string,
     aptitudActualizarDto: UpdateAptitudeDto,
   ): Promise<Aptitud> {
-    const aptitudActualizar = await this.aptitudModel.findById(id);
+    const aptitudActualizar = await this.aptitudModel
+      .findOneAndUpdate({ _id: id }, aptitudActualizarDto, { new: true })
+      .exec();
     if (!aptitudActualizar) {
-      throw new NotFoundException('El id no existe');
+      throw new NotFoundException('El turno no existe');
     }
-    Object.keys(aptitudActualizarDto).forEach((propiedad) => {
-      if (propiedad in aptitudActualizar) {
-        aptitudActualizar[propiedad] = aptitudActualizarDto[propiedad];
-      }
-    });
-    await aptitudActualizar.save();
     return aptitudActualizar;
   }
 

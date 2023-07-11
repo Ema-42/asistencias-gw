@@ -7,7 +7,7 @@ export type TurnosDocument = HydratedDocument<Turno>;
 
 @Schema({ timestamps: true, collection: 'turnos' })
 export class Turno {
-  @Prop({ type: String, required: true })
+  @Prop({ type: String, required: true, unique: true })
   nombre: string;
 
   @Prop({ type: String })
