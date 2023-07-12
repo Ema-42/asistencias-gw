@@ -58,4 +58,10 @@ export class PersonasController {
   ) {
     return this.personasService.cambiarEstado(id, cambiarEstadoDto);
   }
+
+  @Delete(':id')
+  @VersionDescription('1', 'servicio DELETE para eliminar una persona')
+  remove(@Param('id') id: string) {
+    return this.personasService.eliminacionLogica(id);
+  }
 }

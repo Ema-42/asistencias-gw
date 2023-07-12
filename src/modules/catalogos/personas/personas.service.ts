@@ -11,8 +11,10 @@ export class PersonasService {
   constructor(
     @InjectModel(Persona.name) private personaModel: Model<Persona>,
   ) {}
-  create(createPersonaDto: CreatePersonaDto) {
-    return 'This action adds a new persona';
+
+  async create(crearPersonaDto: CreatePersonaDto): Promise<Persona> {
+    const crearPersona = await this.personaModel.create(crearPersonaDto);
+    return crearPersona;
   }
 
   async findAll(): Promise<Persona[]> {
@@ -20,12 +22,22 @@ export class PersonasService {
     return listado;
   }
 
-  findOne(id: string) {
-    return `This action returns a #${id} persona`;
+  async findOne(id: string) {
+    const persona = await this.personaModel.findById(id);
+    if (!persona) {
+      throw new NotFoundException('El id no existe');
+    }
+    return persona;
   }
 
-  update(id: string, updatePersonaDto: UpdatePersonaDto) {
-    return `This action updates a #${id} persona`;
+  async update(id: string, actualizarPersonaDto: UpdatePersonaDto) {
+    const actualizarPersona = await this.personaModel
+      .findOneAndUpdate({ _id: id }, actualizarPersonaDto, { new: true })
+      .exec();
+    if (!actualizarPersona) {
+      throw new NotFoundException('El id no existe');
+    }
+    return actualizarPersona;
   }
 
   async cambiarEstado(
@@ -38,8 +50,17 @@ export class PersonasService {
       { new: true },
     );
     if (!personaEstado) {
-      throw new NotFoundException('La persona no existe');
+      throw new NotFoundException('El id no existe');
     }
     return personaEstado;
+  }
+
+  async eliminacionLogica(id: string): Promise<Persona> {
+    const personaEliminar = await this.personaModel.findById(id).exec();
+    if (!personaEliminar) {
+      throw new NotFoundException('El id no existe');
+    }
+    personaEliminar.esEliminado = 1;
+    return personaEliminar.save();
   }
 }
