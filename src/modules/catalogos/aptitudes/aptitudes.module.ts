@@ -3,7 +3,10 @@ import { AptitudesService } from './aptitudes.service';
 import { AptitudesController } from './aptitudes.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Aptitud, AptitudesSchema } from './schema/aptitudes.schema';
-import { Turno, TurnosSchema } from 'src/modules/turnos/schema/turnos.schema';
+import {
+  Turno,
+  TurnosSchema,
+} from 'src/modules/turnos/turnos/schema/turnos.schema';
 
 @Module({
   imports: [

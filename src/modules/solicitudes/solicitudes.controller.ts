@@ -36,6 +36,10 @@ export class SolicitudesController {
   }
 
   @Patch(':id')
+  @VersionDescription(
+    '1',
+    'servicio PATCH para obtener actualizar una solicitud',
+  )
   update(
     @Param('id') id: string,
     @Body() updateSolicitudeDto: UpdateSolicitudeDto,
@@ -44,6 +48,7 @@ export class SolicitudesController {
   }
 
   @Delete(':id')
+  @VersionDescription('1', 'servicio DELETE para eliminar una solicitud')
   remove(@Param('id') id: string) {
     return this.solicitudesService.remove(id);
   }

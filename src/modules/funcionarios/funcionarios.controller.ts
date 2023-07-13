@@ -60,6 +60,6 @@ export class FuncionariosController {
   @Delete(':id')
   @VersionDescription('1', 'servicio DELETE para eliminar un funcionario')
   remove(@Param('id') id: string) {
-    return this.funcionariosService.remove(id);
+    return this.funcionariosService.eliminacionLogica(id);
   }
 }

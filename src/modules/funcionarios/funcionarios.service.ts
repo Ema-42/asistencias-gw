@@ -54,14 +54,32 @@ export class FuncionariosService {
     return funcionarioBuscar;
   }
 
-  update(id: string, updateFuncionarioDto: UpdateFuncionarioDto) {
-    return `This action updates a #${id} funcionario`;
+  async update(id: string, funcionarioActualizarDto: UpdateFuncionarioDto) {
+    const funcionarioActualizar = await this.funcionarioModel
+      .findOneAndUpdate({ _id: id }, funcionarioActualizarDto, { new: true })
+      .exec();
+    if (!funcionarioActualizar) {
+      throw new NotFoundException('El funcionario no existe');
+    }
+    return funcionarioActualizar;
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} funcionario`;
+  async cambiarEstado(id: string, cambiarEstadoDto: CambiarEstadoDto) {
+    const funcionarioEstado = await this.funcionarioModel.findById(id);
+    if (!funcionarioEstado) {
+      throw new NotFoundException('El id no existe');
+    }
+    funcionarioEstado.estado = cambiarEstadoDto.estado;
+    await funcionarioEstado.save();
+    return funcionarioEstado;
   }
-  cambiarEstado(id: string, cambiarEstadoDto: CambiarEstadoDto) {
-    return 1;
+
+  async eliminacionLogica(id: string): Promise<Funcionario> {
+    const funcionarioEliminar = await this.funcionarioModel.findById(id).exec();
+    if (!funcionarioEliminar) {
+      throw new NotFoundException('El id no existe');
+    }
+    funcionarioEliminar.esEliminado = 1;
+    return funcionarioEliminar.save();
   }
 }
