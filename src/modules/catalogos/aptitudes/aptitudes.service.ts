@@ -5,7 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Aptitud } from './schema/aptitudes.schema';
 import { Model } from 'mongoose';
 import { CambiarEstadoDto } from './dto/cambiar-estado.dto';
-import { Turno } from 'src/modules/turnos/turnos/schema/turnos.schema';
+import { Turno } from 'src/modules/turnos-asignaciones/turnos/schema/turnos.schema';
 
 @Injectable()
 export class AptitudesService {

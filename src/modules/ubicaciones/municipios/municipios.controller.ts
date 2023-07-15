@@ -14,7 +14,7 @@ import { VersionDescription } from 'src/decorators/controller.decorator';
 import { ApiTags } from '@nestjs/swagger';
 import { CambiarEstadoDto } from './dto/cambiar-estado.dto';
 
-@ApiTags('MUNICIPIOS')
+@ApiTags('UBICACIONES')
 @Controller('municipios')
 export class MunicipiosController {
   constructor(private readonly municipiosService: MunicipiosService) {}

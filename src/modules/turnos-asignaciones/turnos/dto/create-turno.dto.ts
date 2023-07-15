@@ -6,6 +6,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { Types } from 'mongoose';
 import { Aptitudes } from 'src/modules/interfaces/aptitudes.interface';
 import { Oficinas } from 'src/modules/interfaces/oficinas.interfaces';
 
@@ -28,12 +29,12 @@ export class CreateTurnoDto {
   @ApiProperty()
   @IsArray()
   @IsOptional()
-  oficinas: Oficinas[];
+  oficinas: Types.ObjectId[];
 
   @ApiProperty()
   @IsArray()
   @IsOptional()
-  aptitudes: Aptitudes[];
+  aptitudes: Types.ObjectId[];
 
   @ApiProperty()
   @IsNotEmpty()

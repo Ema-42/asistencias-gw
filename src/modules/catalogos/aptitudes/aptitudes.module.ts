@@ -6,7 +6,7 @@ import { Aptitud, AptitudesSchema } from './schema/aptitudes.schema';
 import {
   Turno,
   TurnosSchema,
-} from 'src/modules/turnos/turnos/schema/turnos.schema';
+} from 'src/modules/turnos-asignaciones/turnos/schema/turnos.schema';
 
 @Module({
   imports: [

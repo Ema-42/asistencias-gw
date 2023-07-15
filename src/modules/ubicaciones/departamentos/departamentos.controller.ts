@@ -14,7 +14,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { VersionDescription } from 'src/decorators/controller.decorator';
 import { CambiarEstadoDto } from './dto/cambiar-estado.dto';
 
-@ApiTags('DEPARTAMENTOS')
+@ApiTags('UBICACIONES')
 @Controller('departamentos')
 export class DepartamentosController {
   constructor(private readonly departamentosService: DepartamentosService) {}

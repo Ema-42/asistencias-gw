@@ -13,8 +13,8 @@ import { UpdateTurnoDto } from './dto/update-turno.dto';
 import { VersionDescription } from 'src/decorators/controller.decorator';
 import { CambiarEstadoDto } from './dto/cambiar-estado.dto';
 import { ApiTags } from '@nestjs/swagger';
-@ApiTags('TURNOS')
-@Controller('turnos')
+@ApiTags('ASIGNACION Y TURNOS')
+@Controller('turnos') //list
 export class TurnosController {
   constructor(private readonly tipoTurnoService: TurnosService) {}
 

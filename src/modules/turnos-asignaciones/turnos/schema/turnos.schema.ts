@@ -16,8 +16,6 @@ export class Turno {
   @Prop({ type: Number })
   fueraHorario: number;
 
-  // @Prop({ type: Array, ref: 'eo_oficinas', default: [] })
-  // oficinas: Oficinas[];
   @Prop({ type: [Types.ObjectId], ref: 'Oficina', default: [] })
   oficinas: ObjectId[];
 
@@ -30,10 +28,10 @@ export class Turno {
   @Prop({ type: Number })
   presencial: number;
 
-  @Prop({ type: String })
+  @Prop({ type: Date })
   horaInicio: string;
 
-  @Prop({ type: String })
+  @Prop({ type: Date })
   horaFin: string;
 
   @Prop({ type: Number, default: 1 })

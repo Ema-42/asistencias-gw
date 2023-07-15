@@ -11,9 +11,11 @@ import { CatalogosModule } from './modules/catalogos/catalogos.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DepartamentosModule } from './modules/ubicaciones/departamentos/departamentos.module';
 import { UbicacionesModule } from './modules/ubicaciones/ubicaciones.module';
-import { TurnosModule } from './modules/turnos/turnos/turnos.module';
+import { TurnosModule } from './modules/turnos-asignaciones/turnos/turnos.module';
 import { SolicitudesModule } from './modules/solicitudes/solicitudes.module';
 import { FuncionariosModule } from './modules/funcionarios/funcionarios.module';
+import { AsignacionesModule } from './modules/turnos-asignaciones/asignaciones/asignaciones.module';
+import { TurnosAsignacionesModule } from './modules/turnos-asignaciones/turnos-asignaciones.module';
 
 @Module({
   imports: [
@@ -39,6 +41,8 @@ import { FuncionariosModule } from './modules/funcionarios/funcionarios.module';
     TurnosModule,
     SolicitudesModule,
     FuncionariosModule,
+    AsignacionesModule,
+    TurnosAsignacionesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
