@@ -12,7 +12,7 @@ export class Aptitud {
   descripcion: string;
 
   @Prop({ type: [Types.ObjectId], ref: 'TipoAptitud', required: true })
-  aptitudes: [Types.ObjectId];
+  tipoAptitudes: [Types.ObjectId];
 
   @Prop({ type: Number, default: 1 })
   estado: number;

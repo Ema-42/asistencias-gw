@@ -1,6 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateAptitudeDto } from './create-aptitude.dto';
-import { IsArray, IsMongoId, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsOptional, IsString } from 'class-validator';
 import { Types } from 'mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -18,5 +18,5 @@ export class UpdateAptitudeDto extends PartialType(CreateAptitudeDto) {
   @ApiProperty()
   @IsOptional()
   @IsArray()
-  aptitudes?: [Types.ObjectId];
+  tipoAptitudes?: [Types.ObjectId];
 }

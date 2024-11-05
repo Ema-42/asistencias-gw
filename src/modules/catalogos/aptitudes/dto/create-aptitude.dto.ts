@@ -16,5 +16,5 @@ export class CreateAptitudeDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsArray()
-  aptitudes: [Types.ObjectId];
+  tipoAptitudes: [Types.ObjectId];
 }

@@ -3,7 +3,7 @@ import { CreateAsignacionDto } from './dto/create-asignacion.dto';
 import { UpdateAsignacionDto } from './dto/update-asignacion.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Asignacion } from './schema/asignaciones.schema';
-import { Model } from 'mongoose';
+import { Model, model } from 'mongoose';
 
 @Injectable()
 export class AsignacionesService {
@@ -21,39 +21,37 @@ export class AsignacionesService {
   async findAll(): Promise<Asignacion[]> {
     const listado = await this.asignacionModel
       .find()
-      //.populate('funcionarios')
+      .populate('funcionarios', 'trabajoCelular', ' ')
       .populate({
         path: 'funcionarios',
-        model: 'Funcionario',
+        select: 'trabajoCelular cargo',
+        // match: { estado: 0 },
         populate: [
           {
             path: 'personaId',
-            model: 'Persona',
             select:
-              'nombres primerApellido segundo Apellido numeroDocumento celular profesion email estado esEliminado',
+              'nombres primerApellido segundoApellido numeroDocumento celular profesion ',
           },
           {
             path: 'oficinaId',
-            model: 'Oficina',
-            select: 'nombre estado esEliminado',
+            select: 'nombre ',
           },
         ],
       })
       .populate({
         path: 'turnoId',
-        select: 'nombre estado', //demas campos
+        select: 'nombre estado',
         populate: [
           {
             path: 'oficinas',
-            model: 'Oficina',
+            select: 'nombre identificador direccion telefono',
           },
           {
             path: 'aptitudes',
-            model: 'Aptitud',
+            select: 'nombre',
             populate: {
-              path: 'aptitudes',
+              path: 'tipoAptitudes',
               select: 'nombre',
-              model: 'TipoAptitud',
             },
           },
         ],
